@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/api/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.production.local
+backend/api/.env
+frontend/.env.local
+
+# Build outputs
+frontend/.next/
+frontend/out/
+backend/api/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+infrastructure/postgres-data/
+infrastructure/redis-data/
+
+# Misc
+*.swp
+*.swo
+*~

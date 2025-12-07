@@ -1,0 +1,13 @@
+{
+  "name": "compliance",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compliance:scan": "inspec exec inspec/hipaa_profile.rb",
+    "compliance:report": "inspec exec inspec/hipaa_profile.rb --reporter json:compliance-report.json html:compliance-report.html",
+    "audit:check": "node scripts/audit-check.js"
+  },
+  "devDependencies": {
+    "inspec": "^5.22.0"
+  }
+}
