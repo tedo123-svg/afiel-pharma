@@ -118,7 +118,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: 'cart-storage',
+      name: 'cart-storage', // Storage key for cart persistence
     }
   )
 )
