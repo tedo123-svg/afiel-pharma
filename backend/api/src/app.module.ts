@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module'
 import { OrdersModule } from './orders/orders.module'
 import { AuditModule } from './audit/audit.module'
 import { EncryptionModule } from './encryption/encryption.module'
+import { AppController } from './app.controller'
 
 @Module({
   imports: [
@@ -31,5 +32,6 @@ import { EncryptionModule } from './encryption/encryption.module'
     AuditModule,
     EncryptionModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
