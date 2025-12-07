@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
 export interface CartItem {
   id: string
@@ -37,9 +36,7 @@ const getCurrentUserId = (): string | null => {
   }
 }
 
-export const useCartStore = create<CartStore>()(
-  persist(
-    (set, get) => ({
+export const useCartStore = create<CartStore>()((set, get) => ({
       items: [],
       currentUserId: null,
       
@@ -116,9 +113,4 @@ export const useCartStore = create<CartStore>()(
       getTotalPrice: () => {
         return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0)
       },
-    }),
-    {
-      name: 'cart-storage', // Storage key for cart persistence
-    }
-  )
-)
+    }))
