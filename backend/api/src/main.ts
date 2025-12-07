@@ -46,9 +46,6 @@ async function bootstrap() {
     }),
   )
 
-  // Trust proxy for Render deployment
-  app.set('trust proxy', 1)
-
   const port = process.env.PORT || 3001
   await app.listen(port, '0.0.0.0')
   console.log(`🚀 API running on http://localhost:${port}`)
