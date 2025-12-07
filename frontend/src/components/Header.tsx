@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import { ShoppingCart, User, LogOut } from 'lucide-react'
+import { ShoppingCart, User, LogOut, Languages } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Header() {
   const router = useRouter()
@@ -12,6 +13,7 @@ export function Header() {
   const { items, setUser: setCartUser, clearCart } = useCartStore()
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
   const [user, setUser] = useState<any>(null)
+  const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
     // Check if user is logged in - runs on every route change
@@ -56,13 +58,13 @@ export function Header() {
 
           <div className="hidden md:flex items-center gap-8">
             <Link href="/" className="hover:text-primary-600 transition-colors">
-              Home
+              {t.nav.home}
             </Link>
             
             {/* Show Products only for patients or non-logged-in users */}
             {(!user || user.role === 'patient') && (
               <Link href="/products" className="hover:text-primary-600 transition-colors">
-                Products
+                {t.nav.products}
               </Link>
             )}
             
@@ -96,11 +98,21 @@ export function Header() {
             )}
             
             <Link href="/about" className="hover:text-primary-600 transition-colors">
-              About
+              {t.nav.about}
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Language Switcher */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'am' : 'en')}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              title={language === 'en' ? 'Switch to Amharic' : 'Switch to English'}
+            >
+              <Languages className="w-5 h-5" />
+              <span className="text-sm font-medium">{language === 'en' ? 'አማ' : 'EN'}</span>
+            </button>
+            
             {/* Show cart only for patients and non-logged-in users */}
             {(!user || user.role === 'patient') && (
               <Link 

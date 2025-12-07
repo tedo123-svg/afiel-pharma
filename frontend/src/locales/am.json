@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "መነሻ",
+    "products": "መድሃኒቶች",
+    "about": "ስለ እኛ",
+    "cart": "ጋሪ",
+    "login": "ግባ",
+    "register": "ተመዝገብ",
+    "account": "መለያ",
+    "signOut": "ውጣ"
+  },
+  "home": {
+    "hero": {
+      "title": "የታመነ የመስመር ላይ ፋርማሲ",
+      "subtitle": "ጥራት ያለው መድሃኒት በቤትዎ በር ላይ። HIPAA-ተኮር የማዘዣ አስተዳደር።",
+      "cta": "መድሃኒቶችን ይመልከቱ"
+    },
+    "featured": "ተመራጭ መድሃኒቶች",
+    "prescriptionRequired": "የሐኪም ማዘዣ ያስፈልጋል",
+    "viewDetails": "ዝርዝር ይመልከቱ"
+  },
+  "products": {
+    "title": "የእኛ መድሃኒቶች",
+    "search": "መድሃኒቶችን ይፈልጉ...",
+    "filters": "ማጣሪያዎች",
+    "prescriptionType": "የማዘዣ አይነት",
+    "all": "ሁሉም",
+    "prescription": "በማዘዣ ብቻ",
+    "otc": "ያለ ማዘዣ",
+    "addToCart": "ወደ ጋሪ ጨምር",
+    "outOfStock": "ተጠናቅቋል",
+    "inStock": "በመጋዘን ውስጥ"
+  },
+  "cart": {
+    "title": "የግዢ ጋሪ",
+    "empty": "ጋሪዎ ባዶ ነው",
+    "continueShopping": "ግዢን ይቀጥሉ",
+    "subtotal": "ንዑስ ድምር",
+    "shipping": "ማጓጓዣ",
+    "tax": "ግብር",
+    "total": "ጠቅላላ",
+    "checkout": "ወደ ክፍያ ይቀጥሉ",
+    "remove": "አስወግድ"
+  },
+  "auth": {
+    "login": "ግባ",
+    "register": "መለያ ፍጠር",
+    "email": "ኢሜይል አድራሻ",
+    "password": "የይለፍ ቃል",
+    "confirmPassword": "የይለፍ ቃል አረጋግጥ",
+    "firstName": "ስም",
+    "lastName": "የአባት ስም",
+    "role": "እኔ",
+    "patient": "ታካሚ (መድሃኒት ግዛ)",
+    "doctor": "ሐኪም (ማዘዣ ስጥ)",
+    "pharmacist": "ፋርማሲስት (ማዘዣ አረጋግጥ)",
+    "alreadyHaveAccount": "መለያ አለዎት?",
+    "dontHaveAccount": "መለያ የለዎትም?",
+    "signIn": "ግባ",
+    "createAccount": "መለያ ፍጠር"
+  },
+  "checkout": {
+    "title": "ክፍያ",
+    "shippingInfo": "የማጓጓዣ መረጃ",
+    "fullName": "ሙሉ ስም",
+    "phone": "ስልክ",
+    "address": "አድራሻ",
+    "city": "ከተማ",
+    "state": "ክልል",
+    "zipCode": "የፖስታ ኮድ",
+    "placeOrder": "ነፃ ትዕዛዝ ያስቀምጡ",
+    "freeDelivery": "ነፃ ማጓጓዣ! ሁሉም ትዕዛዞች በአሁኑ ጊዜ ነፃ ናቸው።"
+  },
+  "common": {
+    "loading": "በመጫን ላይ...",
+    "error": "ስህተት",
+    "success": "ተሳክቷል",
+    "cancel": "ሰርዝ",
+    "save": "አስቀምጥ",
+    "delete": "ሰርዝ",
+    "edit": "አርትዕ",
+    "close": "ዝጋ",
+    "back": "ተመለስ",
+    "next": "ቀጣይ"
+  }
+}

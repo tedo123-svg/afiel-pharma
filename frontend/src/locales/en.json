@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "cart": "Cart",
+    "login": "Login",
+    "register": "Register",
+    "account": "Account",
+    "signOut": "Sign Out"
+  },
+  "home": {
+    "hero": {
+      "title": "Your Trusted Online Pharmacy",
+      "subtitle": "Quality medications delivered to your doorstep. HIPAA-compliant prescription management.",
+      "cta": "Browse Medications"
+    },
+    "featured": "Featured Medications",
+    "prescriptionRequired": "Prescription Required",
+    "viewDetails": "View Details"
+  },
+  "products": {
+    "title": "Our Medications",
+    "search": "Search medications...",
+    "filters": "Filters",
+    "prescriptionType": "Prescription Type",
+    "all": "All",
+    "prescription": "Prescription Only",
+    "otc": "Over the Counter",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Create Account",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "role": "I am a",
+    "patient": "Patient (Buy Medications)",
+    "doctor": "Doctor (Prescribe & Verify)",
+    "pharmacist": "Pharmacist (Verify Prescriptions)",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signIn": "Sign in",
+    "createAccount": "Create account"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingInfo": "Shipping Information",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "zipCode": "ZIP Code",
+    "placeOrder": "Place Free Order",
+    "freeDelivery": "Free Delivery! All orders are currently free while we set up payment processing."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next"
+  }
+}
