@@ -15,7 +15,7 @@ export class User {
   @Column({ unique: true })
   email: string
 
-  @Column({ name: 'password_hash' })
+  @Column({ name: 'password' })
   passwordHash: string
 
   @Column({ type: 'varchar', default: UserRole.PATIENT })
