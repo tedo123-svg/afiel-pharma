@@ -31,7 +31,6 @@ export class OrdersService {
     const order = this.orderRepository.create({
       userId,
       ...orderData,
-      requiresPrescriptionVerification: requiresPrescription,
       status: requiresPrescription 
         ? OrderStatus.AWAITING_PRESCRIPTION_VERIFICATION 
         : OrderStatus.PENDING,
@@ -68,8 +67,6 @@ export class OrdersService {
     order.status = approved 
       ? OrderStatus.PRESCRIPTION_VERIFIED 
       : OrderStatus.PRESCRIPTION_DENIED
-    order.pharmacistId = pharmacistId
-    order.pharmacistNotes = notes || ''
 
     await this.orderRepository.save(order)
     await this.auditService.log(
@@ -86,8 +83,7 @@ export class OrdersService {
     // Get all orders that require prescription verification
     return this.orderRepository.find({
       where: { 
-        status: OrderStatus.AWAITING_PRESCRIPTION_VERIFICATION,
-        requiresPrescriptionVerification: true
+        status: OrderStatus.AWAITING_PRESCRIPTION_VERIFICATION
       },
       order: { createdAt: 'DESC' }
     })
@@ -119,12 +115,8 @@ export class OrdersService {
   async shipOrder(orderId: string): Promise<Order | null> {
     const order = await this.findOne(orderId)
     if (!order) return null
-
-    // Generate tracking number
-    const trackingNumber = `TRK${Date.now()}`
     
     order.status = OrderStatus.SHIPPED
-    order.trackingNumber = trackingNumber
 
     await this.orderRepository.save(order)
     await this.auditService.log(
