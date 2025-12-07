@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Package, Truck, CheckCircle, XCircle, Clock, Eye, X, FileText, Trash2 } from 'lucide-react'
+import { Package, Truck, CheckCircle, XCircle, Clock, Eye, X, FileText, Trash2, Download, FileSpreadsheet, FileDown } from 'lucide-react'
 import { useToast } from '@/components/ui/ToastContainer'
 import { apiUrl } from '@/lib/api'
 
@@ -130,6 +130,159 @@ export default function AdminOrdersPage() {
     }
   }
 
+  const exportToCSV = () => {
+    const headers = ['Order ID', 'Customer ID', 'Date', 'Status', 'Total Amount', 'Payment Method', 'Items', 'Shipping Address']
+    const rows = filteredOrders.map(order => [
+      order.id,
+      order.userId,
+      new Date(order.createdAt).toLocaleString(),
+      order.status,
+      `$${parseFloat(order.totalAmount).toFixed(2)}`,
+      order.paymentMethod || 'N/A',
+      order.items.map((item: any) => `${item.name} (x${item.quantity})`).join('; '),
+      order.shippingAddress ? `${order.shippingAddress.fullName}, ${order.shippingAddress.address}, ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zipCode}` : 'N/A'
+    ])
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n')
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `orders_${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+    showToast('Orders exported to CSV successfully!', 'success')
+  }
+
+  const exportToExcel = () => {
+    const headers = ['Order ID', 'Customer ID', 'Date', 'Status', 'Total Amount', 'Payment Method', 'Items', 'Shipping Address']
+    const rows = filteredOrders.map(order => [
+      order.id,
+      order.userId,
+      new Date(order.createdAt).toLocaleString(),
+      order.status,
+      parseFloat(order.totalAmount).toFixed(2),
+      order.paymentMethod || 'N/A',
+      order.items.map((item: any) => `${item.name} (x${item.quantity})`).join('; '),
+      order.shippingAddress ? `${order.shippingAddress.fullName}, ${order.shippingAddress.address}, ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zipCode}` : 'N/A'
+    ])
+
+    let html = '<html><head><meta charset="utf-8"><style>table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background-color:#4CAF50;color:white}</style></head><body>'
+    html += '<h2>AfiEl Pharma - Orders Export</h2>'
+    html += '<p>Export Date: ' + new Date().toLocaleString() + '</p>'
+    html += '<table><thead><tr>'
+    headers.forEach(header => {
+      html += `<th>${header}</th>`
+    })
+    html += '</tr></thead><tbody>'
+    rows.forEach(row => {
+      html += '<tr>'
+      row.forEach(cell => {
+        html += `<td>${cell}</td>`
+      })
+      html += '</tr>'
+    })
+    html += '</tbody></table></body></html>'
+
+    const blob = new Blob([html], { type: 'application/vnd.ms-excel' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `orders_${new Date().toISOString().split('T')[0]}.xls`
+    link.click()
+    showToast('Orders exported to Excel successfully!', 'success')
+  }
+
+  const exportToPDF = () => {
+    const printWindow = window.open('', '_blank')
+    if (!printWindow) {
+      showToast('Please allow popups to export PDF', 'error')
+      return
+    }
+
+    let html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>AfiEl Pharma - Orders Export</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 20px; }
+          h1 { color: #2563eb; }
+          .header { margin-bottom: 30px; }
+          .order { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; page-break-inside: avoid; }
+          .order-header { background: #f3f4f6; padding: 10px; margin: -15px -15px 15px -15px; }
+          .order-id { font-size: 18px; font-weight: bold; }
+          .status { display: inline-block; padding: 5px 10px; border-radius: 5px; font-size: 12px; }
+          .status-pending { background: #fef3c7; color: #92400e; }
+          .status-shipped { background: #ddd6fe; color: #5b21b6; }
+          .status-delivered { background: #d1fae5; color: #065f46; }
+          .items { margin: 10px 0; }
+          .item { padding: 5px 0; border-bottom: 1px solid #eee; }
+          table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+          th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
+          th { background: #2563eb; color: white; }
+          @media print {
+            .no-print { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>AfiEl Pharma - Orders Report</h1>
+          <p><strong>Export Date:</strong> ${new Date().toLocaleString()}</p>
+          <p><strong>Total Orders:</strong> ${filteredOrders.length}</p>
+          <p><strong>Filter:</strong> ${filter === 'all' ? 'All Orders' : filter.charAt(0).toUpperCase() + filter.slice(1)}</p>
+        </div>
+        <button class="no-print" onclick="window.print()" style="padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px;">Print / Save as PDF</button>
+    `
+
+    filteredOrders.forEach(order => {
+      const statusClass = order.status.includes('shipped') ? 'status-shipped' : 
+                         order.status.includes('delivered') ? 'status-delivered' : 'status-pending'
+      
+      html += `
+        <div class="order">
+          <div class="order-header">
+            <div class="order-id">Order #${order.id.substring(0, 8)}</div>
+            <span class="status ${statusClass}">${order.status.replace(/_/g, ' ').toUpperCase()}</span>
+          </div>
+          <p><strong>Customer ID:</strong> ${order.userId}</p>
+          <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+          <p><strong>Total Amount:</strong> $${parseFloat(order.totalAmount).toFixed(2)}</p>
+          <p><strong>Payment Method:</strong> ${order.paymentMethod || 'N/A'}</p>
+          
+          <div class="items">
+            <strong>Items:</strong>
+            ${order.items.map((item: any) => `
+              <div class="item">
+                ${item.name} - Qty: ${item.quantity} - $${(Number(item.price) * item.quantity).toFixed(2)}
+                ${item.requiresPrescription ? ' <span style="background: #fed7aa; padding: 2px 6px; border-radius: 3px; font-size: 11px;">Rx</span>' : ''}
+              </div>
+            `).join('')}
+          </div>
+          
+          ${order.shippingAddress ? `
+            <div style="margin-top: 15px; padding: 10px; background: #f9fafb; border-radius: 5px;">
+              <strong>Shipping Address:</strong><br>
+              ${order.shippingAddress.fullName}<br>
+              ${order.shippingAddress.address}<br>
+              ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zipCode}<br>
+              Phone: ${order.shippingAddress.phone}
+            </div>
+          ` : ''}
+        </div>
+      `
+    })
+
+    html += '</body></html>'
+    
+    printWindow.document.write(html)
+    printWindow.document.close()
+    showToast('PDF preview opened. Use Print to save as PDF', 'success')
+  }
+
   const getStatusBadge = (status: string) => {
     const config: any = {
       'pending': { color: 'bg-gray-100 text-gray-800', icon: Clock },
@@ -173,11 +326,41 @@ export default function AdminOrdersPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Order Management</h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Manage and ship customer orders
-        </p>
+      <div className="mb-8 flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold mb-2">Order Management</h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage and ship customer orders
+          </p>
+        </div>
+        
+        {/* Export Buttons */}
+        <div className="flex gap-2">
+          <button
+            onClick={exportToCSV}
+            className="btn btn-secondary flex items-center gap-2"
+            title="Export to CSV"
+          >
+            <FileDown className="w-4 h-4" />
+            CSV
+          </button>
+          <button
+            onClick={exportToExcel}
+            className="btn btn-secondary flex items-center gap-2"
+            title="Export to Excel"
+          >
+            <FileSpreadsheet className="w-4 h-4" />
+            Excel
+          </button>
+          <button
+            onClick={exportToPDF}
+            className="btn btn-secondary flex items-center gap-2"
+            title="Export to PDF"
+          >
+            <Download className="w-4 h-4" />
+            PDF
+          </button>
+        </div>
       </div>
 
       {/* Filters */}
