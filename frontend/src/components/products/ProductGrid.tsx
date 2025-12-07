@@ -5,6 +5,7 @@ import { Lock, ShoppingCart, Upload, X, CheckCircle } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { FilterState } from './ProductFilters'
 import { apiUrl } from '@/lib/api'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Product {
   id: string
@@ -24,6 +25,7 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ filters }: ProductGridProps) {
+  const { t } = useLanguage()
   const [products, setProducts] = useState<Product[]>([])
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -138,7 +140,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600 dark:text-gray-400">Loading products...</p>
+        <p className="text-gray-600 dark:text-gray-400">{t.common.loading}</p>
       </div>
     )
   }
@@ -192,7 +194,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
               {product.requiresPrescription && (
                 <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-2 font-medium">
                   <Lock className="w-4 h-4" />
-                  <span>Prescription Required</span>
+                  <span>{t.home.prescriptionRequired}</span>
                 </div>
               )}
             
@@ -207,14 +209,14 @@ export function ProductGrid({ filters }: ProductGridProps) {
               <div className="flex items-center justify-between mt-4">
                 <div>
                   <span className="text-2xl font-bold text-primary-600">${product.price}</span>
-                  <p className="text-xs text-gray-500">In stock: {product.stockQuantity}</p>
+                  <p className="text-xs text-gray-500">{t.products.inStock}: {product.stockQuantity}</p>
                 </div>
                 <button 
                   onClick={() => handleAddToCart(product)}
                   className="btn btn-primary flex items-center gap-2"
                 >
                   <ShoppingCart className="w-4 h-4" />
-                  Add
+                  {t.products.addToCart}
                 </button>
               </div>
             </div>
@@ -227,7 +229,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold">Upload Prescription</h3>
+              <h3 className="text-xl font-semibold">{t.products.uploadPrescription}</h3>
               <button
                 onClick={handleCloseModal}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -238,7 +240,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
 
             <div className="mb-4 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
               <p className="text-sm text-orange-900 dark:text-orange-100 mb-2">
-                <strong>📋 Prescription Required</strong>
+                <strong>📋 {t.home.prescriptionRequired}</strong>
               </p>
               <p className="text-sm text-orange-900 dark:text-orange-100">
                 This medication requires a valid prescription. Please upload your prescription to add this item to your cart.
@@ -257,7 +259,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
 
             <div className="mb-6">
               <label className="block text-sm font-medium mb-2">
-                Upload Prescription Image *
+                {t.products.prescriptionImage} *
               </label>
               <input
                 type="file"
@@ -278,7 +280,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
                 onClick={handleCloseModal}
                 className="btn btn-secondary flex-1"
               >
-                Cancel
+                {t.common.cancel}
               </button>
               <button
                 onClick={handlePrescriptionUpload}
@@ -286,7 +288,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
                 className="btn btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Upload className="w-4 h-4" />
-                Add to Cart
+                {t.products.addToCart}
               </button>
             </div>
           </div>

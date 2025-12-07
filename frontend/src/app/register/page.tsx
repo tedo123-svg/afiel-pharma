@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Lock, Mail, User, AlertCircle, CheckCircle } from 'lucide-react'
 import { apiUrl } from '@/lib/api'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -76,12 +78,12 @@ export default function RegisterPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold text-gray-900 dark:text-white">
-            Create your account
+            {t.auth.register}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Already have an account?{' '}
+            {t.auth.alreadyHaveAccount}{' '}
             <Link href="/login" className="font-medium text-primary-600 hover:text-primary-500">
-              Sign in
+              {t.auth.signIn}
             </Link>
           </p>
         </div>
@@ -98,7 +100,7 @@ export default function RegisterPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium mb-2">
-                  First Name
+                  {t.auth.firstName}
                 </label>
                 <input
                   id="firstName"
@@ -113,7 +115,7 @@ export default function RegisterPage() {
 
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium mb-2">
-                  Last Name
+                  {t.auth.lastName}
                 </label>
                 <input
                   id="lastName"
@@ -129,7 +131,7 @@ export default function RegisterPage() {
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email address
+                {t.auth.email}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -149,7 +151,7 @@ export default function RegisterPage() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Password
+                {t.auth.password}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -162,14 +164,14 @@ export default function RegisterPage() {
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700"
-                  placeholder="Min. 8 characters"
+                  placeholder={t.auth.minPassword}
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
-                Confirm Password
+                {t.auth.confirmPassword}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -182,14 +184,14 @@ export default function RegisterPage() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700"
-                  placeholder="Confirm your password"
+                  placeholder={t.auth.confirmPassword}
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="role" className="block text-sm font-medium mb-2">
-                I am a *
+                {t.auth.role} *
               </label>
               <select
                 id="role"
@@ -199,9 +201,9 @@ export default function RegisterPage() {
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700"
               >
-                <option value="patient">Patient (Buy Medications)</option>
-                <option value="doctor">Doctor (Prescribe & Verify)</option>
-                <option value="pharmacist">Pharmacist (Verify Prescriptions)</option>
+                <option value="patient">{t.auth.patient}</option>
+                <option value="doctor">{t.auth.doctor}</option>
+                <option value="pharmacist">{t.auth.pharmacist}</option>
               </select>
             </div>
 
@@ -214,13 +216,13 @@ export default function RegisterPage() {
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
-                I agree to the{' '}
+                {t.auth.termsAgree}{' '}
                 <Link href="/terms" className="text-primary-600 hover:text-primary-500">
-                  Terms of Service
+                  {t.auth.termsOfService}
                 </Link>{' '}
-                and{' '}
+                {t.auth.and}{' '}
                 <Link href="/privacy" className="text-primary-600 hover:text-primary-500">
-                  Privacy Policy
+                  {t.auth.privacyPolicy}
                 </Link>
               </label>
             </div>
@@ -230,7 +232,7 @@ export default function RegisterPage() {
               disabled={loading}
               className="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? `${t.auth.createAccount}...` : t.auth.createAccount}
             </button>
           </form>
 

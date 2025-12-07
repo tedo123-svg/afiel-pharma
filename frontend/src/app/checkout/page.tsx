@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation'
 import { CreditCard, Lock, CheckCircle, Truck } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { apiUrl } from '@/lib/api'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CheckoutPage() {
   const router = useRouter()
+  const { t } = useLanguage()
   const { items, getTotalPrice, clearCart } = useCartStore()
   const [step, setStep] = useState(1)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -109,12 +111,12 @@ export default function CheckoutPage() {
   if (items.length === 0 && step < 4) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
-        <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
+        <h1 className="text-2xl font-bold mb-4">{t.cart.empty}</h1>
         <button
           onClick={() => router.push('/products')}
           className="btn btn-primary"
         >
-          Continue Shopping
+          {t.cart.continueShopping}
         </button>
       </div>
     )
@@ -247,7 +249,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold mb-8">{t.checkout.title}</h1>
 
       {/* Progress Steps */}
       <div className="flex items-center justify-center mb-12">
@@ -255,12 +257,12 @@ export default function CheckoutPage() {
           <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-300'}`}>
             1
           </div>
-          <div className="text-sm mx-2">Shipping Info</div>
+          <div className="text-sm mx-2">{t.checkout.shippingInfo}</div>
           <div className={`w-24 h-1 ${step >= 2 ? 'bg-primary-600' : 'bg-gray-300'}`} />
           <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-300'}`}>
             2
           </div>
-          <div className="text-sm mx-2">Order Placed</div>
+          <div className="text-sm mx-2">{t.checkout.step} 2</div>
         </div>
       </div>
 
@@ -272,11 +274,11 @@ export default function CheckoutPage() {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
                   <Truck className="w-6 h-6" />
-                  Shipping Information
+                  {t.checkout.shippingInfo}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-2">Full Name *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.fullName} *</label>
                     <input
                       type="text"
                       name="fullName"
@@ -287,7 +289,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email *</label>
+                    <label className="block text-sm font-medium mb-2">{t.auth.email} *</label>
                     <input
                       type="email"
                       name="email"
@@ -298,7 +300,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Phone *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.phone} *</label>
                     <input
                       type="tel"
                       name="phone"
@@ -309,7 +311,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-2">Address *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.address} *</label>
                     <input
                       type="text"
                       name="address"
@@ -320,7 +322,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">City *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.city} *</label>
                     <input
                       type="text"
                       name="city"
@@ -331,7 +333,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">State *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.state} *</label>
                     <input
                       type="text"
                       name="state"
@@ -342,7 +344,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">ZIP Code *</label>
+                    <label className="block text-sm font-medium mb-2">{t.checkout.zipCode} *</label>
                     <input
                       type="text"
                       name="zipCode"
@@ -356,7 +358,7 @@ export default function CheckoutPage() {
                 
                 <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mt-6">
                   <p className="text-sm text-green-900 dark:text-green-100">
-                    🎉 <strong>Free Delivery!</strong> All orders are currently free while we set up payment processing.
+                    🎉 {t.checkout.freeDelivery}
                   </p>
                 </div>
                 
@@ -365,7 +367,7 @@ export default function CheckoutPage() {
                   disabled={isProcessing}
                   className="btn btn-primary w-full mt-6 disabled:opacity-50"
                 >
-                  {isProcessing ? 'Placing Order...' : 'Place Free Order'}
+                  {isProcessing ? `${t.checkout.placeOrder}...` : t.checkout.placeOrder}
                 </button>
               </div>
             )}
@@ -540,7 +542,7 @@ export default function CheckoutPage() {
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-24">
-            <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+            <h3 className="text-xl font-semibold mb-4">{t.checkout.orderSummary}</h3>
             
             <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
               {items.map((item) => (
@@ -553,19 +555,19 @@ export default function CheckoutPage() {
 
             <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Subtotal</span>
+                <span>{t.cart.subtotal}</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span>Shipping</span>
+                <span>{t.cart.shipping}</span>
                 <span>${shipping.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span>Tax</span>
+                <span>{t.cart.tax}</span>
                 <span>${tax.toFixed(2)}</span>
               </div>
               <div className="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-bold text-lg">
-                <span>Total</span>
+                <span>{t.cart.total}</span>
                 <span className="text-primary-600">${total.toFixed(2)}</span>
               </div>
             </div>

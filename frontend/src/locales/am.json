@@ -105,6 +105,33 @@
     "allRightsReserved": "ሁሉም መብቶች የተጠበቁ ናቸው። በሁሉም 50 ግዛቶች ፈቃድ ያለው።",
     "hipaaCompliant": "HIPAA ተኮር"
   },
+  "about": {
+    "title": "ስለ አፊኤል ፋርማ",
+    "intro": "አፊኤል ፋርማ HIPAA-ተኮር የማዘዣ መድሃኒት መድረክ ሲሆን በፈቃድ ያለው ፋርማሲስት ማረጋገጫ ደህንነቱ የተጠበቀ እና ምቹ የመድሃኒት አገልግሎት ይሰጣል።",
+    "hipaaCompliantTitle": "HIPAA ተኮር",
+    "hipaaCompliantDesc": "ሁሉም የታካሚ መረጃ በHIPAA ደንቦች መሰረት የተመሰጠረ እና የተጠበቀ ነው።",
+    "licensedPharmacistsTitle": "የተፈቀደላቸው ፋርማሲስቶች",
+    "licensedPharmacistsDesc": "እያንዳንዱ ማዘዣ በክልል የተፈቀደላቸው ፋርማሲስቶች ይረጋገጣል።",
+    "support247Title": "24/7 ድጋፍ",
+    "support247Desc": "የፋርማሲስት ቡድናችን በሁሉም ሰዓት ለምክክር ዝግጁ ነው።",
+    "fdaApprovedTitle": "FDA የተፈቀደ",
+    "fdaApprovedDesc": "ሁሉም መድሃኒቶች የFDA ደህንነት እና ጥራት ደረጃዎችን ያሟላሉ።",
+    "certificationsTitle": "የምስክር ወረቀቶች እና ተገዢነት",
+    "ourPharmacistsTitle": "የእኛ ፋርማሲስቶች",
+    "ourPharmacistsDesc": "ቡድናችን በችርቻሮ እና ክሊኒካዊ ፋርማሲ አቀማመጥ በአማካይ ከ10+ ዓመታት በላይ ልምድ ያላቸው የተፈቀደላቸው ፋርማሲስቶች ያቀፈ ነው። እያንዳንዱ ፋርማሲስት በመድሃኒት ደህንነት፣ የመድሃኒት መስተጋብር እና የታካሚ ምክክር ላይ ቀጣይነት ያለው ስልጠና ይወስዳል።"
+  },
+  "account": {
+    "title": "የእኔ መለያ",
+    "signOut": "ውጣ",
+    "name": "ስም",
+    "email": "ኢሜይል",
+    "role": "ሚና",
+    "quickLinks": "ፈጣን አገናኞች",
+    "myPrescriptions": "የእኔ ማዘዣዎች",
+    "myPrescriptionsDesc": "ማዘዣዎችዎን ይመልከቱ እና ያስተዳድሩ",
+    "orderHistory": "የትዕዛዝ ታሪክ",
+    "orderHistoryDesc": "ትዕዛዞችዎን ይከታተሉ"
+  },
   "common": {
     "loading": "በመጫን ላይ...",
     "error": "ስህተት",

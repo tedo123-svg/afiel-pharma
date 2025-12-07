@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ProductFilters, FilterState } from '@/components/products/ProductFilters'
 import { ProductGrid } from '@/components/products/ProductGrid'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ProductsPage() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState<FilterState>({
     conditions: [],
@@ -38,14 +40,14 @@ export default function ProductsPage() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <p>Loading...</p>
+        <p>{t.common.loading}</p>
       </div>
     )
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Medications</h1>
+      <h1 className="text-3xl font-bold mb-8">{t.products.title}</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <aside className="lg:col-span-1">
           <ProductFilters onFilterChange={handleFilterChange} />

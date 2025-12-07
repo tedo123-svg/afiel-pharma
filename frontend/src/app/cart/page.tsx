@@ -6,9 +6,11 @@ import { PharmacistChat } from '@/components/cart/PharmacistChat'
 import { useCartStore } from '@/store/cartStore'
 import { AlertCircle, FileText, Upload } from 'lucide-react'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CartPage() {
   const { items, clearCart } = useCartStore()
+  const { t } = useLanguage()
 
   const prescriptionItems = items.filter(item => item.requiresPrescription)
   const prescriptionItemsWithoutUpload = prescriptionItems.filter(
@@ -26,20 +28,20 @@ export default function CartPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Shopping Cart</h1>
+        <h1 className="text-3xl font-bold">{t.cart.title}</h1>
         {items.length > 0 && (
           <button
             onClick={handleClearCart}
             className="text-sm text-red-600 hover:text-red-700 underline"
           >
-            Clear Cart
+            {t.cart.remove}
           </button>
         )}
       </div>
       
       {items.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-xl text-gray-600 dark:text-gray-400">Your cart is empty</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">{t.cart.empty}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

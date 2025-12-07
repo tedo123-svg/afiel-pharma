@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { useCartStore } from '@/store/cartStore'
 import { Trash2, Lock, Upload, CheckCircle } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function CartItems() {
+  const { t } = useLanguage()
   const { items, updateQuantity, removeItem, updatePrescription } = useCartStore()
   const [uploadingIds, setUploadingIds] = useState<Record<string, boolean>>({})
 
@@ -51,11 +53,11 @@ export function CartItems() {
                     <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                       <div className="flex items-center gap-2 text-sm text-orange-900 dark:text-orange-100 mb-2">
                         <Lock className="w-4 h-4" />
-                        <span className="font-semibold">⚠️ Prescription Required</span>
+                        <span className="font-semibold">⚠️ {t.home.prescriptionRequired}</span>
                       </div>
 
                       <label className="block text-sm mb-2">
-                        <span className="sr-only">Upload prescription</span>
+                        <span className="sr-only">{t.products.uploadPrescription}</span>
                         <input
                           type="file"
                           accept="image/*,.pdf"
@@ -69,7 +71,7 @@ export function CartItems() {
                       </p>
 
                       {uploadingIds[item.id] && (
-                        <p className="text-xs text-gray-500 mt-2">Uploading...</p>
+                        <p className="text-xs text-gray-500 mt-2">{t.common.loading}</p>
                       )}
                     </div>
                   )}
@@ -98,7 +100,7 @@ export function CartItems() {
                   className="text-red-600 hover:text-red-700 flex items-center gap-2"
                 >
                   <Trash2 className="w-4 h-4" />
-                  Remove
+                  {t.cart.remove}
                 </button>
               </div>
             </div>

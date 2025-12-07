@@ -105,6 +105,33 @@
     "allRightsReserved": "All rights reserved. Licensed in all 50 states.",
     "hipaaCompliant": "HIPAA Compliant"
   },
+  "about": {
+    "title": "About AfiEl Pharma",
+    "intro": "AfiEl Pharma is a HIPAA-compliant prescription medication platform dedicated to providing safe, secure, and convenient access to medications with licensed pharmacist verification.",
+    "hipaaCompliantTitle": "HIPAA Compliant",
+    "hipaaCompliantDesc": "All patient data is encrypted and protected according to HIPAA regulations.",
+    "licensedPharmacistsTitle": "Licensed Pharmacists",
+    "licensedPharmacistsDesc": "Every prescription is verified by state-licensed pharmacists.",
+    "support247Title": "24/7 Support",
+    "support247Desc": "Our pharmacist team is available around the clock for consultations.",
+    "fdaApprovedTitle": "FDA Approved",
+    "fdaApprovedDesc": "All medications meet FDA safety and quality standards.",
+    "certificationsTitle": "Certifications & Compliance",
+    "ourPharmacistsTitle": "Our Pharmacists",
+    "ourPharmacistsDesc": "Our team consists of licensed pharmacists with an average of 10+ years of experience in retail and clinical pharmacy settings. Each pharmacist undergoes continuous training on medication safety, drug interactions, and patient counseling."
+  },
+  "account": {
+    "title": "My Account",
+    "signOut": "Sign Out",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "quickLinks": "Quick Links",
+    "myPrescriptions": "My Prescriptions",
+    "myPrescriptionsDesc": "View and manage your prescriptions",
+    "orderHistory": "Order History",
+    "orderHistoryDesc": "Track your orders"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
