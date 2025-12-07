@@ -82,7 +82,7 @@ export class AuthService {
 
   async getAllUsers(): Promise<User[]> {
     return this.userRepository.find({
-      select: ['id', 'email', 'firstName', 'lastName', 'role', 'createdAt'],
+      select: ['id', 'email', 'firstName', 'lastName', 'role', 'createdAt', 'isActive'],
       order: { createdAt: 'DESC' },
     })
   }
