@@ -31,18 +31,6 @@ export class Order {
   @Column({ type: 'jsonb', nullable: true, name: 'shipping_address' })
   shippingAddress: any
 
-  @Column({ nullable: true, name: 'tracking_number' })
-  trackingNumber: string
-
-  @Column({ name: 'requires_prescription_verification', default: false })
-  requiresPrescriptionVerification: boolean
-
-  @Column({ name: 'pharmacist_id', nullable: true })
-  pharmacistId: string
-
-  @Column({ type: 'text', nullable: true, name: 'pharmacist_notes' })
-  pharmacistNotes: string
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
