@@ -25,9 +25,7 @@ export async function seedAdminUser(dataSource: DataSource) {
     role: UserRole.ADMIN,
     firstName: 'System',
     lastName: 'Administrator',
-    emailVerified: true,
     isActive: true,
-    mfaEnabled: false,
   })
 
   await userRepository.save(admin)
@@ -80,7 +78,6 @@ export async function seedTestUsers(dataSource: DataSource) {
         role: userData.role,
         firstName: userData.firstName,
         lastName: userData.lastName,
-        emailVerified: true,
         isActive: true,
       })
 
