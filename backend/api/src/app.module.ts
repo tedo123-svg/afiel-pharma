@@ -19,7 +19,7 @@ import { AppController } from './app.controller'
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: false,
-      ssl: process.env.DATABASE_SSL === 'true',
+      ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
       logging: process.env.NODE_ENV === 'development',
     }),
     ThrottlerModule.forRoot([{
