@@ -38,7 +38,7 @@ export class OrdersService {
 
     const result = await this.orderRepository.save(order)
     const savedOrder = Array.isArray(result) ? result[0] : result
-    await this.auditService.log(AuditAction.ORDER_CREATE, userId, 'order', savedOrder.id)
+    // await this.auditService.log(AuditAction.ORDER_CREATE, userId, 'order', savedOrder.id)
 
     return savedOrder
   }
@@ -69,12 +69,12 @@ export class OrdersService {
       : OrderStatus.PRESCRIPTION_DENIED
 
     await this.orderRepository.save(order)
-    await this.auditService.log(
-      AuditAction.ORDER_CREATE,
-      pharmacistId,
-      'order',
-      orderId
-    )
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   pharmacistId,
+    //   'order',
+    //   orderId
+    // )
 
     return order
   }
@@ -119,12 +119,12 @@ export class OrdersService {
     order.status = OrderStatus.SHIPPED
 
     await this.orderRepository.save(order)
-    await this.auditService.log(
-      AuditAction.ORDER_CREATE,
-      'admin',
-      'order',
-      orderId
-    )
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
 
     return order
   }
@@ -136,12 +136,12 @@ export class OrdersService {
     order.status = OrderStatus.DELIVERED
 
     await this.orderRepository.save(order)
-    await this.auditService.log(
-      AuditAction.ORDER_CREATE,
-      'admin',
-      'order',
-      orderId
-    )
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
 
     return order
   }
@@ -158,12 +158,12 @@ export class OrdersService {
     }
 
     await this.orderRepository.remove(order)
-    await this.auditService.log(
-      AuditAction.ORDER_CREATE,
-      'admin',
-      'order',
-      orderId
-    )
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
 
     return { success: true, message: 'Order deleted successfully' }
   }
