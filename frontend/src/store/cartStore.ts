@@ -118,10 +118,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: () => {
-        const userId = getCurrentUserId()
-        return userId ? `cart-storage-${userId}` : 'cart-storage-guest'
-      },
+      name: 'cart-storage',
     }
   )
 )
