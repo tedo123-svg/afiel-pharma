@@ -9,10 +9,10 @@ interface Product {
   id: string
   name: string
   price: number
-  requires_prescription: boolean
-  generic_name: string
-  brand_name: string
-  image_url?: string
+  requiresPrescription: boolean
+  genericName: string
+  brandName: string
+  imageUrl?: string
 }
 
 export function FeaturedProducts() {
@@ -40,9 +40,9 @@ export function FeaturedProducts() {
       <h2 className="text-3xl font-bold mb-8">Featured Medications</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {products.map((product) => (
-          <div key={product.id} className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative ${product.requires_prescription ? 'ring-2 ring-red-500 ring-opacity-50' : ''}`}>
+          <div key={product.id} className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative ${product.requiresPrescription ? 'ring-2 ring-red-500 ring-opacity-50' : ''}`}>
             {/* Red notification badge for prescription items */}
-            {product.requires_prescription && (
+            {product.requiresPrescription && (
               <div className="absolute top-3 right-3 z-10">
                 <div className="relative">
                   <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
@@ -52,9 +52,9 @@ export function FeaturedProducts() {
             )}
             
             <div className="w-full h-48 bg-gradient-to-br from-primary-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center overflow-hidden">
-              {product.image_url ? (
+              {product.imageUrl ? (
                 <img 
-                  src={product.image_url} 
+                  src={product.imageUrl} 
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
@@ -66,7 +66,7 @@ export function FeaturedProducts() {
             </div>
             
             <div className="p-6">
-              {product.requires_prescription && (
+              {product.requiresPrescription && (
                 <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-2 font-medium">
                   <Lock className="w-4 h-4" />
                   <span>Prescription Required</span>
@@ -74,7 +74,7 @@ export function FeaturedProducts() {
               )}
               <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {product.brand_name || product.generic_name}
+                {product.brandName || product.genericName}
               </p>
               <div className="flex items-center justify-between">
                 <span className="text-2xl font-bold text-primary-600">${product.price}</span>
