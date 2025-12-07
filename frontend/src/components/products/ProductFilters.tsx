@@ -1,5 +1,8 @@
 'use client'
 
+import React from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
+
 interface ProductFiltersProps {
   onFilterChange: (filters: FilterState) => void
 }
@@ -11,6 +14,7 @@ export interface FilterState {
 }
 
 export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
+  const { t } = useLanguage()
   const [filters, setFilters] = React.useState<FilterState>({
     conditions: [],
     type: [],
@@ -45,11 +49,11 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-semibold mb-4">Filters</h3>
+      <h3 className="text-lg font-semibold mb-4">{t.products.filters}</h3>
       
       <div className="space-y-6">
         <div>
-          <h4 className="font-medium mb-2">Condition</h4>
+          <h4 className="font-medium mb-2">{t.products.condition}</h4>
           <div className="space-y-2">
             {['Diabetes', 'Hypertension', 'Cholesterol', 'Asthma'].map((condition) => (
               <label key={condition} className="flex items-center gap-2 cursor-pointer">
@@ -66,7 +70,7 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
         </div>
 
         <div>
-          <h4 className="font-medium mb-2">Type</h4>
+          <h4 className="font-medium mb-2">{t.products.type}</h4>
           <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input 
@@ -75,7 +79,7 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
                 checked={filters.type.includes('brand')}
                 onChange={(e) => handleTypeChange('brand', e.target.checked)}
               />
-              <span className="text-sm">Brand Name</span>
+              <span className="text-sm">{t.products.brandName}</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input 
@@ -84,13 +88,13 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
                 checked={filters.type.includes('generic')}
                 onChange={(e) => handleTypeChange('generic', e.target.checked)}
               />
-              <span className="text-sm">Generic</span>
+              <span className="text-sm">{t.products.generic}</span>
             </label>
           </div>
         </div>
 
         <div>
-          <h4 className="font-medium mb-2">Prescription Required</h4>
+          <h4 className="font-medium mb-2">{t.products.prescriptionRequired}</h4>
           <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input 
@@ -100,7 +104,7 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
                 checked={filters.prescriptionType === 'all'}
                 onChange={() => handlePrescriptionTypeChange('all')}
               />
-              <span className="text-sm">All</span>
+              <span className="text-sm">{t.products.all}</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input 
@@ -110,7 +114,7 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
                 checked={filters.prescriptionType === 'prescription'}
                 onChange={() => handlePrescriptionTypeChange('prescription')}
               />
-              <span className="text-sm">Prescription Only</span>
+              <span className="text-sm">{t.products.prescription}</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input 
@@ -120,7 +124,7 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
                 checked={filters.prescriptionType === 'otc'}
                 onChange={() => handlePrescriptionTypeChange('otc')}
               />
-              <span className="text-sm">Over-the-Counter</span>
+              <span className="text-sm">{t.products.otc}</span>
             </label>
           </div>
         </div>
@@ -128,5 +132,3 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
     </div>
   )
 }
-
-import React from 'react'
