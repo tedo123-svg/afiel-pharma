@@ -154,6 +154,27 @@
     "orderHistory": "የትዕዛዝ ታሪክ",
     "orderHistoryDesc": "ትዕዛዞችዎን ይከታተሉ"
   },
+  "healthTips": {
+    "title": "የጤና ምክሮች",
+    "medicationAdherenceTitle": "የመድሃኒት ተገዢነት",
+    "medicationAdherenceDesc": "መድሃኒቶችን እንደታዘዙት መውሰድ የጤና ውጤቶችን በ50% ያሻሽላል",
+    "drugInteractionsTitle": "የመድሃኒት መስተጋብር",
+    "drugInteractionsDesc": "ሁልጊዜ ስለሚወስዷቸው ሁሉም መድሃኒቶች ለፋርማሲስትዎ ያሳውቁ",
+    "storageTipsTitle": "የማከማቻ ምክሮች",
+    "storageTipsDesc": "መድሃኒቶችን ከቀጥተኛ የፀሐይ ብርሃን ርቀው በቀዝቃዛ እና ደረቅ ቦታ ያስቀምጡ"
+  },
+  "symptomFinder": {
+    "title": "መድሃኒቶችን በሁኔታ ያግኙ",
+    "subtitle": "ለተለመዱ የጤና ሁኔታዎች መድሃኒቶችን ያስሱ",
+    "diabetes": "የስኳር በሽታ",
+    "hypertension": "የደም ግፊት",
+    "cholesterol": "ኮሌስትሮል",
+    "asthma": "አስም",
+    "allergies": "አለርጂዎች",
+    "painRelief": "ህመም ማስታገሻ",
+    "antibiotics": "አንቲባዮቲክስ",
+    "vitamins": "ቫይታሚኖች"
+  },
   "common": {
     "loading": "በመጫን ላይ...",
     "error": "ስህተት",

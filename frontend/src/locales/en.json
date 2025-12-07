@@ -154,6 +154,27 @@
     "orderHistory": "Order History",
     "orderHistoryDesc": "Track your orders"
   },
+  "healthTips": {
+    "title": "Health Tips",
+    "medicationAdherenceTitle": "Medication Adherence",
+    "medicationAdherenceDesc": "Taking medications as prescribed improves health outcomes by 50%",
+    "drugInteractionsTitle": "Drug Interactions",
+    "drugInteractionsDesc": "Always inform your pharmacist about all medications you're taking",
+    "storageTipsTitle": "Storage Tips",
+    "storageTipsDesc": "Store medications in a cool, dry place away from direct sunlight"
+  },
+  "symptomFinder": {
+    "title": "Find Medications by Condition",
+    "subtitle": "Browse medications for common health conditions",
+    "diabetes": "Diabetes",
+    "hypertension": "Hypertension",
+    "cholesterol": "Cholesterol",
+    "asthma": "Asthma",
+    "allergies": "Allergies",
+    "painRelief": "Pain Relief",
+    "antibiotics": "Antibiotics",
+    "vitamins": "Vitamins"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
