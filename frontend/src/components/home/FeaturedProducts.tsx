@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Lock } from 'lucide-react'
+import { Lock, Pill } from 'lucide-react'
 import { apiUrl } from '@/lib/api'
 
 interface Product {
@@ -59,7 +59,9 @@ export function FeaturedProducts() {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gray-200 dark:bg-gray-700" />
+                <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+                  <Pill className="w-20 h-20 text-blue-300 dark:text-gray-500" />
+                </div>
               )}
             </div>
             
