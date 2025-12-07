@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Lock, Pill } from 'lucide-react'
 import { apiUrl } from '@/lib/api'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Product {
   id: string
@@ -17,6 +18,7 @@ interface Product {
 
 export function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([])
+  const { t } = useLanguage()
 
   useEffect(() => {
     fetchFeaturedProducts()
@@ -37,7 +39,7 @@ export function FeaturedProducts() {
 
   return (
     <section className="container mx-auto px-4">
-      <h2 className="text-3xl font-bold mb-8">Featured Medications</h2>
+      <h2 className="text-3xl font-bold mb-8">{t.home.featured}</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {products.map((product) => (
           <div key={product.id} className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden relative ${product.requiresPrescription ? 'ring-2 ring-red-500 ring-opacity-50' : ''}`}>
@@ -69,7 +71,7 @@ export function FeaturedProducts() {
               {product.requiresPrescription && (
                 <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-2 font-medium">
                   <Lock className="w-4 h-4" />
-                  <span>Prescription Required</span>
+                  <span>{t.home.prescriptionRequired}</span>
                 </div>
               )}
               <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
@@ -79,7 +81,7 @@ export function FeaturedProducts() {
               <div className="flex items-center justify-between">
                 <span className="text-2xl font-bold text-primary-600">${product.price}</span>
                 <Link href="/products" className="btn btn-primary">
-                  View Details
+                  {t.home.viewDetails}
                 </Link>
               </div>
             </div>

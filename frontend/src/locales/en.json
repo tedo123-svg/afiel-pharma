@@ -7,17 +7,28 @@
     "login": "Login",
     "register": "Register",
     "account": "Account",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "myPrescriptions": "My Prescriptions",
+    "verifyPrescriptions": "Verify Prescriptions",
+    "manageProducts": "Manage Products",
+    "manageUsers": "Manage Users",
+    "manageOrders": "Manage Orders"
   },
   "home": {
     "hero": {
-      "title": "Your Trusted Online Pharmacy",
-      "subtitle": "Quality medications delivered to your doorstep. HIPAA-compliant prescription management.",
+      "title": "AfiEl Pharma - Your Trusted Online Pharmacy",
+      "subtitle": "HIPAA-compliant prescription medications delivered to your door with licensed pharmacist verification",
       "cta": "Browse Medications"
     },
     "featured": "Featured Medications",
     "prescriptionRequired": "Prescription Required",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "hipaaCompliant": "HIPAA Compliant",
+    "hipaaDesc": "Your health data is encrypted and protected",
+    "fastDelivery": "Fast Delivery",
+    "fastDeliveryDesc": "Get your medications within 3-5 business days",
+    "verifiedPharmacists": "Verified Pharmacists",
+    "verifiedPharmacistsDesc": "Licensed professionals review every prescription"
   },
   "products": {
     "title": "Our Medications",
@@ -29,7 +40,9 @@
     "otc": "Over the Counter",
     "addToCart": "Add to Cart",
     "outOfStock": "Out of Stock",
-    "inStock": "In Stock"
+    "inStock": "In Stock",
+    "uploadPrescription": "Upload Prescription",
+    "prescriptionImage": "Prescription Image"
   },
   "cart": {
     "title": "Shopping Cart",
@@ -40,7 +53,8 @@
     "tax": "Tax",
     "total": "Total",
     "checkout": "Proceed to Checkout",
-    "remove": "Remove"
+    "remove": "Remove",
+    "quantity": "Quantity"
   },
   "auth": {
     "login": "Sign In",
@@ -57,7 +71,12 @@
     "alreadyHaveAccount": "Already have an account?",
     "dontHaveAccount": "Don't have an account?",
     "signIn": "Sign in",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "minPassword": "Min. 8 characters",
+    "termsAgree": "I agree to the",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy"
   },
   "checkout": {
     "title": "Checkout",
@@ -69,7 +88,22 @@
     "state": "State",
     "zipCode": "ZIP Code",
     "placeOrder": "Place Free Order",
-    "freeDelivery": "Free Delivery! All orders are currently free while we set up payment processing."
+    "freeDelivery": "Free Delivery! All orders are currently free while we set up payment processing.",
+    "orderSummary": "Order Summary",
+    "step": "Step"
+  },
+  "footer": {
+    "description": "HIPAA-compliant prescription medication platform",
+    "quickLinks": "Quick Links",
+    "prescriptions": "Prescriptions",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "hipaaNotice": "HIPAA Notice",
+    "contact": "Contact",
+    "support": "24/7 Pharmacist Support",
+    "allRightsReserved": "All rights reserved. Licensed in all 50 states.",
+    "hipaaCompliant": "HIPAA Compliant"
   },
   "common": {
     "loading": "Loading...",
@@ -81,6 +115,12 @@
     "edit": "Edit",
     "close": "Close",
     "back": "Back",
-    "next": "Next"
+    "next": "Next",
+    "price": "Price",
+    "name": "Name",
+    "description": "Description",
+    "status": "Status",
+    "date": "Date",
+    "actions": "Actions"
   }
 }

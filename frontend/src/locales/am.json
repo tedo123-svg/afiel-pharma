@@ -7,17 +7,28 @@
     "login": "ግባ",
     "register": "ተመዝገብ",
     "account": "መለያ",
-    "signOut": "ውጣ"
+    "signOut": "ውጣ",
+    "myPrescriptions": "የእኔ ማዘዣዎች",
+    "verifyPrescriptions": "ማዘዣዎችን አረጋግጥ",
+    "manageProducts": "መድሃኒቶችን አስተዳድር",
+    "manageUsers": "ተጠቃሚዎችን አስተዳድር",
+    "manageOrders": "ትዕዛዞችን አስተዳድር"
   },
   "home": {
     "hero": {
-      "title": "የታመነ የመስመር ላይ ፋርማሲ",
-      "subtitle": "ጥራት ያለው መድሃኒት በቤትዎ በር ላይ። HIPAA-ተኮር የማዘዣ አስተዳደር።",
+      "title": "አፊኤል ፋርማ - የታመነ የመስመር ላይ ፋርማሲ",
+      "subtitle": "HIPAA-ተኮር የማዘዣ መድሃኒቶች በፈቃድ ያለው ፋርማሲስት ማረጋገጫ ወደ በርዎ ይደርሳሉ",
       "cta": "መድሃኒቶችን ይመልከቱ"
     },
     "featured": "ተመራጭ መድሃኒቶች",
     "prescriptionRequired": "የሐኪም ማዘዣ ያስፈልጋል",
-    "viewDetails": "ዝርዝር ይመልከቱ"
+    "viewDetails": "ዝርዝር ይመልከቱ",
+    "hipaaCompliant": "HIPAA ተኮር",
+    "hipaaDesc": "የጤና መረጃዎ የተመሰጠረ እና የተጠበቀ ነው",
+    "fastDelivery": "ፈጣን ማድረስ",
+    "fastDeliveryDesc": "መድሃኒቶችዎን በ3-5 የስራ ቀናት ውስጥ ያግኙ",
+    "verifiedPharmacists": "የተረጋገጡ ፋርማሲስቶች",
+    "verifiedPharmacistsDesc": "የፈቃድ ባለሙያዎች እያንዳንዱን ማዘዣ ይገመግማሉ"
   },
   "products": {
     "title": "የእኛ መድሃኒቶች",
@@ -29,7 +40,9 @@
     "otc": "ያለ ማዘዣ",
     "addToCart": "ወደ ጋሪ ጨምር",
     "outOfStock": "ተጠናቅቋል",
-    "inStock": "በመጋዘን ውስጥ"
+    "inStock": "በመጋዘን ውስጥ",
+    "uploadPrescription": "ማዘዣ ስቀል",
+    "prescriptionImage": "የማዘዣ ምስል"
   },
   "cart": {
     "title": "የግዢ ጋሪ",
@@ -40,7 +53,8 @@
     "tax": "ግብር",
     "total": "ጠቅላላ",
     "checkout": "ወደ ክፍያ ይቀጥሉ",
-    "remove": "አስወግድ"
+    "remove": "አስወግድ",
+    "quantity": "ብዛት"
   },
   "auth": {
     "login": "ግባ",
@@ -57,7 +71,12 @@
     "alreadyHaveAccount": "መለያ አለዎት?",
     "dontHaveAccount": "መለያ የለዎትም?",
     "signIn": "ግባ",
-    "createAccount": "መለያ ፍጠር"
+    "createAccount": "መለያ ፍጠር",
+    "minPassword": "ቢያንስ 8 ቁምፊዎች",
+    "termsAgree": "እስማማለሁ",
+    "termsOfService": "የአገልግሎት ውሎች",
+    "and": "እና",
+    "privacyPolicy": "የግላዊነት ፖሊሲ"
   },
   "checkout": {
     "title": "ክፍያ",
@@ -69,7 +88,22 @@
     "state": "ክልል",
     "zipCode": "የፖስታ ኮድ",
     "placeOrder": "ነፃ ትዕዛዝ ያስቀምጡ",
-    "freeDelivery": "ነፃ ማጓጓዣ! ሁሉም ትዕዛዞች በአሁኑ ጊዜ ነፃ ናቸው።"
+    "freeDelivery": "ነፃ ማጓጓዣ! ሁሉም ትዕዛዞች በአሁኑ ጊዜ ነፃ ናቸው።",
+    "orderSummary": "የትዕዛዝ ማጠቃለያ",
+    "step": "ደረጃ"
+  },
+  "footer": {
+    "description": "HIPAA-ተኮር የማዘዣ መድሃኒት መድረክ",
+    "quickLinks": "ፈጣን አገናኞች",
+    "prescriptions": "ማዘዣዎች",
+    "legal": "ህጋዊ",
+    "privacyPolicy": "የግላዊነት ፖሊሲ",
+    "termsOfService": "የአገልግሎት ውሎች",
+    "hipaaNotice": "HIPAA ማስታወቂያ",
+    "contact": "አግኙን",
+    "support": "24/7 የፋርማሲስት ድጋፍ",
+    "allRightsReserved": "ሁሉም መብቶች የተጠበቁ ናቸው። በሁሉም 50 ግዛቶች ፈቃድ ያለው።",
+    "hipaaCompliant": "HIPAA ተኮር"
   },
   "common": {
     "loading": "በመጫን ላይ...",
@@ -81,6 +115,12 @@
     "edit": "አርትዕ",
     "close": "ዝጋ",
     "back": "ተመለስ",
-    "next": "ቀጣይ"
+    "next": "ቀጣይ",
+    "price": "ዋጋ",
+    "name": "ስም",
+    "description": "መግለጫ",
+    "status": "ሁኔታ",
+    "date": "ቀን",
+    "actions": "ድርጊቶች"
   }
 }
