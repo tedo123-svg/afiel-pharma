@@ -54,6 +54,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials')
     }
 
+    if (!user.isActive) {
+      throw new UnauthorizedException('Account has been deactivated. Please contact support.')
+    }
+
     const payload = { sub: user.id, email: user.email, role: user.role }
     const token = this.jwtService.sign(payload)
 
@@ -87,7 +91,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({ where: { id: userId } })
     if (!user) return null
 
-    // Toggle user status functionality removed - column doesn't exist
+    user.isActive = !user.isActive
     await this.userRepository.save(user)
     
     // await this.auditService.log(

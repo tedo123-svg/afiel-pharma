@@ -38,9 +38,9 @@ export default function AdminUsersPage() {
       const response = await fetch(apiUrl('/auth/users'))
       if (response.ok) {
         const data = await response.json()
-        // Filter out admin users, only show staff (doctor/pharmacist)
-        const staffUsers = data.filter((u: any) => u.role === 'doctor' || u.role === 'pharmacist')
-        setUsers(staffUsers)
+        // Show all users except admins
+        const nonAdminUsers = data.filter((u: any) => u.role !== 'admin')
+        setUsers(nonAdminUsers)
       }
     } catch (error) {
       console.error('Error fetching users:', error)
@@ -214,13 +214,13 @@ export default function AdminUsersPage() {
       )}
 
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold mb-4">Staff Accounts ({users.length})</h3>
+        <h3 className="text-lg font-semibold mb-4">All Users ({users.length})</h3>
         
         {users.length === 0 ? (
           <div className="text-center py-8">
             <Shield className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-600 dark:text-gray-400">No staff accounts yet</p>
-            <p className="text-sm text-gray-500 mt-1">Create your first pharmacist or doctor account above</p>
+            <p className="text-gray-600 dark:text-gray-400">No users yet</p>
+            <p className="text-sm text-gray-500 mt-1">Users will appear here when they register</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -255,9 +255,11 @@ export default function AdminUsersPage() {
                     <span className={`px-3 py-1 rounded-full text-sm ${
                       staffUser.role === 'pharmacist' 
                         ? 'bg-blue-100 text-blue-800' 
-                        : 'bg-green-100 text-green-800'
+                        : staffUser.role === 'doctor'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-purple-100 text-purple-800'
                     }`}>
-                      {staffUser.role === 'pharmacist' ? 'Pharmacist' : 'Doctor'}
+                      {staffUser.role === 'pharmacist' ? 'Pharmacist' : staffUser.role === 'doctor' ? 'Doctor' : 'Patient'}
                     </span>
                     
                     <button

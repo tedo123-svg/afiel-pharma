@@ -28,6 +28,9 @@ export class User {
   @Column({ name: 'last_name', nullable: true })
   lastName: string
 
+  @Column({ name: 'is_active', default: true })
+  isActive: boolean
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
