@@ -31,7 +31,6 @@ export class AuthService {
       firstName,
       lastName,
       role: userRole,
-      isActive: true,
     })
 
     await this.userRepository.save(user)
@@ -53,10 +52,6 @@ export class AuthService {
     
     if (!user || !await bcrypt.compare(password, user.passwordHash)) {
       throw new UnauthorizedException('Invalid credentials')
-    }
-
-    if (!user.isActive) {
-      throw new UnauthorizedException('Account is inactive')
     }
 
     const payload = { sub: user.id, email: user.email, role: user.role }
@@ -83,7 +78,7 @@ export class AuthService {
 
   async getAllUsers(): Promise<User[]> {
     return this.userRepository.find({
-      select: ['id', 'email', 'firstName', 'lastName', 'role', 'isActive', 'createdAt', 'lastLoginAt'],
+      select: ['id', 'email', 'firstName', 'lastName', 'role', 'createdAt'],
       order: { createdAt: 'DESC' },
     })
   }
@@ -92,7 +87,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({ where: { id: userId } })
     if (!user) return null
 
-    user.isActive = !user.isActive
+    // Toggle user status functionality removed - column doesn't exist
     await this.userRepository.save(user)
     
     // await this.auditService.log(

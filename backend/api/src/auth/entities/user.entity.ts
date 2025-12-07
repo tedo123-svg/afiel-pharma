@@ -28,15 +28,9 @@ export class User {
   @Column({ name: 'last_name', nullable: true })
   lastName: string
 
-  @Column({ name: 'is_active', default: true })
-  isActive: boolean
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date
-
-  @Column({ name: 'last_login_at', type: 'timestamp', nullable: true })
-  lastLoginAt: Date
 }
