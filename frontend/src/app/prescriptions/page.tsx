@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { FileText, Eye, Trash2, Calendar, Package, X } from 'lucide-react'
+import { apiUrl } from '@/lib/api'
 
 export default function PrescriptionsPage() {
   const router = useRouter()
@@ -31,7 +32,7 @@ export default function PrescriptionsPage() {
 
   const fetchPrescriptions = async (userData: any) => {
     try {
-      const response = await fetch(`http://localhost:3001/orders/user/${userData.id}`, {
+      const response = await fetch(apiUrl(`/orders/user/${userData.id}`), {
         headers: {
           'x-user-id': userData.id,
           'x-user-role': userData.role,

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Package, Clock, CheckCircle, XCircle, Truck } from 'lucide-react'
+import { apiUrl } from '@/lib/api'
 
 export default function OrdersPage() {
   const router = useRouter()
@@ -25,7 +26,7 @@ export default function OrdersPage() {
       const userData = localStorage.getItem('user')
       const user = userData ? JSON.parse(userData) : null
       
-      const response = await fetch(`http://localhost:3001/orders/user/${userId}`, {
+      const response = await fetch(apiUrl(`/orders/user/${userId}`), {
         headers: {
           'x-user-id': user?.id || '',
           'x-user-role': user?.role || 'patient',

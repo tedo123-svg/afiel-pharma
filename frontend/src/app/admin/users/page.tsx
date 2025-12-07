@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { UserPlus, Edit, Trash2, Shield } from 'lucide-react'
+import { apiUrl } from '@/lib/api'
 
 export default function AdminUsersPage() {
   const router = useRouter()
@@ -34,7 +35,7 @@ export default function AdminUsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3001/auth/users')
+      const response = await fetch(apiUrl('/auth/users'))
       if (response.ok) {
         const data = await response.json()
         // Filter out admin users, only show staff (doctor/pharmacist)
@@ -48,7 +49,7 @@ export default function AdminUsersPage() {
 
   const handleToggleStatus = async (userId: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/auth/users/${userId}/toggle-status`, {
+      const response = await fetch(apiUrl(`/auth/users/${userId}/toggle-status`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ adminId: user.id }),
@@ -70,7 +71,7 @@ export default function AdminUsersPage() {
     e.preventDefault()
     
     try {
-      const response = await fetch('http://localhost:3001/auth/register', {
+      const response = await fetch(apiUrl('/auth/register'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

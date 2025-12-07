@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Lock } from 'lucide-react'
+import { apiUrl } from '@/lib/api'
 
 interface Product {
   id: string
@@ -23,7 +24,7 @@ export function FeaturedProducts() {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/products')
+      const response = await fetch(apiUrl('/products'))
       if (response.ok) {
         const data = await response.json()
         // Get first 3 products as featured

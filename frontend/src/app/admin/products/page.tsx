@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, Edit, Trash2, Upload, X } from 'lucide-react'
 import { useToast } from '@/components/ui/ToastContainer'
+import { apiUrl } from '@/lib/api'
 
 export default function AdminProductsPage() {
   const router = useRouter()
@@ -41,7 +42,7 @@ export default function AdminProductsPage() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/products')
+      const response = await fetch(apiUrl('/products'))
       if (response.ok) {
         const data = await response.json()
         setProducts(data)
@@ -155,8 +156,8 @@ export default function AdminProductsPage() {
     
     try {
       const url = editingProduct 
-        ? `http://localhost:3001/products/${editingProduct.id}`
-        : 'http://localhost:3001/products'
+        ? apiUrl(`/products/${editingProduct.id}`)
+        : apiUrl('/products')
       
       const method = editingProduct ? 'PUT' : 'POST'
       
@@ -223,7 +224,7 @@ export default function AdminProductsPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/products/${id}`, {
+      const response = await fetch(apiUrl(`/products/${id}`), {
         method: 'DELETE',
       })
 

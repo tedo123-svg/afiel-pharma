@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { FileText, CheckCircle, XCircle, Clock, Image as ImageIcon } from 'lucide-react'
+import { apiUrl } from '@/lib/api'
 
 export default function DoctorPrescriptionsPage() {
   const router = useRouter()
@@ -28,7 +29,7 @@ export default function DoctorPrescriptionsPage() {
 
   const fetchPendingPrescriptions = async (userData: any) => {
     try {
-      const response = await fetch('http://localhost:3001/orders/prescriptions/pending', {
+      const response = await fetch(apiUrl('/orders/prescriptions/pending'), {
         headers: {
           'x-user-id': userData.id,
           'x-user-role': userData.role,
@@ -50,7 +51,7 @@ export default function DoctorPrescriptionsPage() {
     if (!user) return
 
     try {
-      const response = await fetch(`http://localhost:3001/orders/${orderId}/verify`, {
+      const response = await fetch(apiUrl(`/orders/${orderId}/verify`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

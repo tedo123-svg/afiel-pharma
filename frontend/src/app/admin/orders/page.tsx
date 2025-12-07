@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Package, Truck, CheckCircle, XCircle, Clock, Eye, X, FileText, Trash2 } from 'lucide-react'
 import { useToast } from '@/components/ui/ToastContainer'
+import { apiUrl } from '@/lib/api'
 
 export default function AdminOrdersPage() {
   const { showToast } = useToast()
@@ -34,7 +35,7 @@ export default function AdminOrdersPage() {
   const fetchOrders = async () => {
     try {
       console.log('Fetching orders...')
-      const response = await fetch('http://localhost:3001/orders')
+      const response = await fetch(apiUrl('/orders'))
       console.log('Response status:', response.status)
       if (response.ok) {
         const data = await response.json()
@@ -53,7 +54,7 @@ export default function AdminOrdersPage() {
 
   const handleShipOrder = async (orderId: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/orders/${orderId}/ship`, {
+      const response = await fetch(apiUrl(`/orders/${orderId}/ship`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ export default function AdminOrdersPage() {
 
   const handleDeliverOrder = async (orderId: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/orders/${orderId}/deliver`, {
+      const response = await fetch(apiUrl(`/orders/${orderId}/deliver`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ export default function AdminOrdersPage() {
 
   const handleDeleteOrder = async (orderId: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/orders/${orderId}/delete`, {
+      const response = await fetch(apiUrl(`/orders/${orderId}/delete`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Lock, ShoppingCart, Upload, X, CheckCircle } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { FilterState } from './ProductFilters'
+import { apiUrl } from '@/lib/api'
 
 interface Product {
   id: string
@@ -41,7 +42,7 @@ export function ProductGrid({ filters }: ProductGridProps) {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/products')
+      const response = await fetch(apiUrl('/products'))
       if (response.ok) {
         const data = await response.json()
         setProducts(data)

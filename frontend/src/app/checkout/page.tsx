@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { CreditCard, Lock, CheckCircle, Truck } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { apiUrl } from '@/lib/api'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -76,7 +77,7 @@ export default function CheckoutPage() {
           },
         }
 
-        const response = await fetch('http://localhost:3001/orders', {
+        const response = await fetch(apiUrl('/orders'), {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
