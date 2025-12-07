@@ -27,24 +27,6 @@ export class User {
   @Column({ name: 'last_name', nullable: true })
   lastName: string
 
-  @Column({ name: 'phone_number', nullable: true })
-  phoneNumber: string
-
-  @Column({ name: 'mfa_enabled', default: false })
-  mfaEnabled: boolean
-
-  @Column({ name: 'mfa_secret', nullable: true })
-  mfaSecret: string
-
-  @Column({ name: 'email_verified', default: false })
-  emailVerified: boolean
-
-  @Column({ name: 'verification_otp', type: 'varchar', nullable: true })
-  verificationOtp?: string
-
-  @Column({ name: 'otp_expires_at', type: 'timestamp', nullable: true })
-  otpExpiresAt?: Date
-
   @Column({ name: 'is_active', default: true })
   isActive: boolean
 

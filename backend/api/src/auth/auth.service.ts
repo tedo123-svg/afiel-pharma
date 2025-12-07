@@ -25,104 +25,27 @@ export class AuthService {
     const passwordHash = await bcrypt.hash(password, 12)
     const userRole = (role || 'patient') as UserRole
     
-    // For patients, require email verification
-    const requiresVerification = userRole === UserRole.PATIENT
-    
     const user = this.userRepository.create({
       email,
       passwordHash,
       firstName,
       lastName,
       role: userRole,
-      emailVerified: !requiresVerification, // Staff accounts are auto-verified
-      isActive: !requiresVerification, // Patients inactive until verified
+      isActive: true,
     })
-
-    if (requiresVerification) {
-      // Generate and set OTP
-      const otp = this.generateOTP()
-      user.verificationOtp = otp
-      user.otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
-      
-      await this.userRepository.save(user)
-      
-      // Send OTP email
-      await this.emailService.sendOTP(email, otp)
-      
-      await this.auditService.log(AuditAction.USER_CREATE, user.id, 'user', user.id)
-      
-      return { 
-        id: user.id, 
-        email: user.email, 
-        role: user.role,
-        requiresVerification: true,
-        message: 'Please check your email for verification code'
-      }
-    }
 
     await this.userRepository.save(user)
     await this.auditService.log(AuditAction.USER_CREATE, user.id, 'user', user.id)
 
-    return { id: user.id, email: user.email, role: user.role, requiresVerification: false }
+    return { id: user.id, email: user.email, role: user.role }
   }
 
   async verifyOTP(email: string, otp: string): Promise<any> {
-    const user = await this.userRepository.findOne({ where: { email } })
-    
-    if (!user) {
-      throw new BadRequestException('User not found')
-    }
-
-    if (user.emailVerified) {
-      throw new BadRequestException('Email already verified')
-    }
-
-    if (!user.verificationOtp || user.verificationOtp !== otp) {
-      throw new BadRequestException('Invalid OTP')
-    }
-
-    if (!user.otpExpiresAt || new Date() > user.otpExpiresAt) {
-      throw new BadRequestException('OTP has expired')
-    }
-
-    // Verify user
-    user.emailVerified = true
-    user.isActive = true
-    user.verificationOtp = undefined
-    user.otpExpiresAt = undefined
-    
-    await this.userRepository.save(user)
-    await this.emailService.sendWelcomeEmail(user.email, user.firstName)
-    
-    await this.auditService.log(AuditAction.LOGIN, user.id, 'user', user.id, { action: 'email_verified' })
-
-    return { 
-      success: true, 
-      message: 'Email verified successfully! You can now login.',
-      user: { id: user.id, email: user.email, role: user.role }
-    }
+    throw new BadRequestException('OTP verification not implemented')
   }
 
   async resendOTP(email: string): Promise<any> {
-    const user = await this.userRepository.findOne({ where: { email } })
-    
-    if (!user) {
-      throw new BadRequestException('User not found')
-    }
-
-    if (user.emailVerified) {
-      throw new BadRequestException('Email already verified')
-    }
-
-    // Generate new OTP
-    const otp = this.generateOTP()
-    user.verificationOtp = otp
-    user.otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000)
-    
-    await this.userRepository.save(user)
-    await this.emailService.sendOTP(email, otp)
-
-    return { success: true, message: 'New OTP sent to your email' }
+    throw new BadRequestException('OTP not implemented')
   }
 
   async login(email: string, password: string, ipAddress?: string) {
