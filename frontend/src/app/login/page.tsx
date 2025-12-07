@@ -36,7 +36,7 @@ export default function LoginPage() {
         window.dispatchEvent(new Event('storage'))
         window.dispatchEvent(new CustomEvent('user-login', { detail: data.user }))
         
-        router.push('/account')
+        router.push('/')
       } else {
         const data = await response.json()
         setError(data.message || 'Invalid email or password')
