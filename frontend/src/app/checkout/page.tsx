@@ -10,7 +10,7 @@ export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
   const [step, setStep] = useState(1)
-  const [paymentMethod, setPaymentMethod] = useState('card')
+  const [paymentMethod, setPaymentMethod] = useState('telebirr')
   const [formData, setFormData] = useState({
     // Shipping
     fullName: '',
@@ -26,6 +26,7 @@ export default function CheckoutPage() {
     cardName: '',
     expiryDate: '',
     cvv: '',
+    telebirrPhone: '',
   })
 
   const subtotal = getTotalPrice()
@@ -368,6 +369,18 @@ export default function CheckoutPage() {
                     <input
                       type="radio"
                       name="paymentMethod"
+                      value="telebirr"
+                      checked={paymentMethod === 'telebirr'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="w-4 h-4"
+                    />
+                    <span className="font-medium text-lg">📱 Telebirr</span>
+                  </label>
+                  
+                  <label className="flex items-center gap-3 p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary-600">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
                       value="card"
                       checked={paymentMethod === 'card'}
                       onChange={(e) => setPaymentMethod(e.target.value)}
@@ -375,30 +388,6 @@ export default function CheckoutPage() {
                     />
                     <CreditCard className="w-5 h-5" />
                     <span className="font-medium">Credit/Debit Card</span>
-                  </label>
-                  
-                  <label className="flex items-center gap-3 p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary-600">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="insurance"
-                      checked={paymentMethod === 'insurance'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="w-4 h-4"
-                    />
-                    <span className="font-medium">Insurance</span>
-                  </label>
-                  
-                  <label className="flex items-center gap-3 p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary-600">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="fsa"
-                      checked={paymentMethod === 'fsa'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="w-4 h-4"
-                    />
-                    <span className="font-medium">FSA/HSA Card</span>
                   </label>
                 </div>
 
@@ -479,19 +468,31 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {paymentMethod === 'insurance' && (
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-6">
-                    <p className="text-sm text-blue-900 dark:text-blue-100">
-                      Insurance payment processing is simulated for this demo. In production, this would integrate with insurance providers.
-                    </p>
-                  </div>
-                )}
-
-                {paymentMethod === 'fsa' && (
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-6">
-                    <p className="text-sm text-blue-900 dark:text-blue-100">
-                      FSA/HSA payment processing is simulated for this demo. In production, this would integrate with FSA/HSA card processors.
-                    </p>
+                {paymentMethod === 'telebirr' && (
+                  <div className="space-y-4 mb-6">
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mb-4">
+                      <p className="text-sm text-green-900 dark:text-green-100 mb-2">
+                        📱 Pay with Telebirr - Ethiopia's Mobile Money
+                      </p>
+                      <p className="text-xs text-green-800 dark:text-green-200">
+                        Enter your Telebirr phone number. You'll receive a payment prompt on your phone to complete the transaction.
+                      </p>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Telebirr Phone Number *</label>
+                      <input
+                        type="tel"
+                        name="telebirrPhone"
+                        required={paymentMethod === 'telebirr'}
+                        placeholder="+251 9XX XXX XXX"
+                        value={formData.telebirrPhone}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">
+                        Make sure this number is registered with Telebirr
+                      </p>
+                    </div>
                   </div>
                 )}
 
