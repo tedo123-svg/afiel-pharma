@@ -31,7 +31,6 @@ export class OrdersService {
     const order = this.orderRepository.create({
       userId,
       ...orderData,
-      requiresPrescriptionVerification: requiresPrescription,
       status: requiresPrescription 
         ? OrderStatus.AWAITING_PRESCRIPTION_VERIFICATION 
         : OrderStatus.PENDING,
@@ -39,7 +38,7 @@ export class OrdersService {
 
     const result = await this.orderRepository.save(order)
     const savedOrder = Array.isArray(result) ? result[0] : result
-    await this.auditService.log(AuditAction.ORDER_CREATE, userId, 'order', savedOrder.id)
+    // await this.auditService.log(AuditAction.ORDER_CREATE, userId, 'order', savedOrder.id)
 
     return savedOrder
   }
@@ -68,17 +67,100 @@ export class OrdersService {
     order.status = approved 
       ? OrderStatus.PRESCRIPTION_VERIFIED 
       : OrderStatus.PRESCRIPTION_DENIED
-    order.pharmacistId = pharmacistId
-    order.pharmacistNotes = notes || ''
 
     await this.orderRepository.save(order)
-    await this.auditService.log(
-      AuditAction.ORDER_CREATE,
-      pharmacistId,
-      'order',
-      orderId
-    )
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   pharmacistId,
+    //   'order',
+    //   orderId
+    // )
 
     return order
+  }
+
+  async getPendingPrescriptions(): Promise<Order[]> {
+    return this.orderRepository.find({
+      where: { 
+        status: OrderStatus.AWAITING_PRESCRIPTION_VERIFICATION
+      },
+      order: { createdAt: 'DESC' }
+    })
+  }
+
+  async getPrescriptionDetails(
+    orderId: string, 
+    requestingUserId: string, 
+    requestingUserRole: string
+  ): Promise<Order | null> {
+    const order = await this.findOne(orderId)
+    if (!order) return null
+
+    if (requestingUserRole === 'admin' || 
+        requestingUserRole === 'pharmacist' || 
+        requestingUserRole === 'doctor') {
+      return order
+    }
+
+    if (order.userId !== requestingUserId) {
+      throw new BadRequestException('Unauthorized: You can only access your own prescriptions')
+    }
+
+    return order
+  }
+
+  async shipOrder(orderId: string): Promise<Order | null> {
+    const order = await this.findOne(orderId)
+    if (!order) return null
+    
+    order.status = OrderStatus.SHIPPED
+
+    await this.orderRepository.save(order)
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
+
+    return order
+  }
+
+  async deliverOrder(orderId: string): Promise<Order | null> {
+    const order = await this.findOne(orderId)
+    if (!order) return null
+
+    order.status = OrderStatus.DELIVERED
+
+    await this.orderRepository.save(order)
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
+
+    return order
+  }
+
+  async deleteOrder(orderId: string): Promise<{ success: boolean; message: string }> {
+    const order = await this.findOne(orderId)
+    if (!order) {
+      return { success: false, message: 'Order not found' }
+    }
+
+    if (order.status !== OrderStatus.SHIPPED && order.status !== OrderStatus.DELIVERED) {
+      throw new BadRequestException('Only shipped or delivered orders can be deleted')
+    }
+
+    await this.orderRepository.remove(order)
+    // await this.auditService.log(
+    //   AuditAction.ORDER_CREATE,
+    //   'admin',
+    //   'order',
+    //   orderId
+    // )
+
+    return { success: true, message: 'Order deleted successfully' }
   }
 }
