@@ -17,6 +17,30 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile optimizations */
+* {
+  -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling for mobile */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Better touch targets for mobile */
+button, a, input, select, textarea {
+  touch-action: manipulation;
 }
 
 /* Accessibility - Focus visible */
@@ -24,22 +48,47 @@ body {
   @apply outline-2 outline-offset-2 outline-primary-500;
 }
 
-/* WCAG 2.2 AA Compliance */
+/* WCAG 2.2 AA Compliance - Larger touch targets for mobile */
 .btn {
   @apply min-h-[44px] min-w-[44px] px-4 py-2 rounded-lg font-medium transition-colors;
 }
 
 .btn-primary {
-  @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500;
+  @apply bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 focus:ring-2 focus:ring-primary-500;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-100;
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600;
+}
+
+/* Mobile-friendly inputs */
+input, select, textarea {
+  @apply text-base;
+  font-size: 16px !important; /* Prevents zoom on iOS */
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+  overflow-x: hidden;
+}
+
+/* Better mobile container spacing */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .btn {
     @apply border-2 border-current;
+  }
+}
+
+/* Improve mobile card spacing */
+@media (max-width: 768px) {
+  .grid {
+    @apply gap-4;
   }
 }
