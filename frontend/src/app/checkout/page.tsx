@@ -10,6 +10,7 @@ export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
   const [step, setStep] = useState(1)
+  const [isProcessing, setIsProcessing] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('telebirr')
   const [formData, setFormData] = useState({
     // Shipping
@@ -48,11 +49,9 @@ export default function CheckoutPage() {
     e.preventDefault()
     
     if (step === 1) {
-      setStep(2)
-    } else if (step === 2) {
-      setStep(3)
-    } else if (step === 3) {
-      // Create order
+      // Skip payment step, go directly to order creation
+      setIsProcessing(true)
+      
       try {
         const userData = localStorage.getItem('user')
         const user = userData ? JSON.parse(userData) : null
@@ -66,7 +65,7 @@ export default function CheckoutPage() {
             requiresPrescription: item.requiresPrescription,
             prescriptionImage: item.prescriptionImage || null,
           })),
-          totalAmount: total,
+          totalAmount: 0, // Free for now
           shippingAddress: {
             fullName: formData.fullName,
             email: formData.email,
@@ -76,6 +75,8 @@ export default function CheckoutPage() {
             state: formData.state,
             zipCode: formData.zipCode,
           },
+          paymentMethod: 'free', // Mark as free order
+          paymentStatus: 'completed', // Auto-complete payment
         }
 
         const response = await fetch(apiUrl('/orders'), {
@@ -89,14 +90,18 @@ export default function CheckoutPage() {
         })
 
         if (response.ok) {
-          setStep(4)
+          setStep(2) // Go to success page
           clearCart()
         } else {
-          alert('Failed to create order')
+          const error = await response.text()
+          console.error('Order creation failed:', error)
+          alert('Failed to create order. Please try again.')
         }
       } catch (error) {
         console.error('Error creating order:', error)
-        alert('Error creating order')
+        alert('Error creating order. Please check your connection.')
+      } finally {
+        setIsProcessing(false)
       }
     }
   }
@@ -169,7 +174,7 @@ export default function CheckoutPage() {
     )
   }
 
-  if (step === 4) {
+  if (step === 2) {
     return (
       <div className="container mx-auto px-4 py-12 max-w-2xl text-center">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12">
@@ -250,14 +255,12 @@ export default function CheckoutPage() {
           <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-300'}`}>
             1
           </div>
+          <div className="text-sm mx-2">Shipping Info</div>
           <div className={`w-24 h-1 ${step >= 2 ? 'bg-primary-600' : 'bg-gray-300'}`} />
           <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-300'}`}>
             2
           </div>
-          <div className={`w-24 h-1 ${step >= 3 ? 'bg-primary-600' : 'bg-gray-300'}`} />
-          <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 3 ? 'bg-primary-600 text-white' : 'bg-gray-300'}`}>
-            3
-          </div>
+          <div className="text-sm mx-2">Order Placed</div>
         </div>
       </div>
 
@@ -350,14 +353,25 @@ export default function CheckoutPage() {
                     />
                   </div>
                 </div>
-                <button type="submit" className="btn btn-primary w-full mt-6">
-                  Continue to Payment
+                
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mt-6">
+                  <p className="text-sm text-green-900 dark:text-green-100">
+                    🎉 <strong>Free Delivery!</strong> All orders are currently free while we set up payment processing.
+                  </p>
+                </div>
+                
+                <button 
+                  type="submit" 
+                  disabled={isProcessing}
+                  className="btn btn-primary w-full mt-6 disabled:opacity-50"
+                >
+                  {isProcessing ? 'Placing Order...' : 'Place Free Order'}
                 </button>
               </div>
             )}
 
-            {/* Step 2: Payment Method */}
-            {step === 2 && (
+            {/* Step 2: Payment Method - DISABLED FOR FREE ORDERS */}
+            {false && step === 2 && (
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
                   <CreditCard className="w-6 h-6" />
@@ -406,8 +420,8 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            {/* Step 3: Review & Pay */}
-            {step === 3 && (
+            {/* Step 3: Review & Pay - DISABLED FOR FREE ORDERS */}
+            {false && step === 3 && (
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
                   <Lock className="w-6 h-6" />
