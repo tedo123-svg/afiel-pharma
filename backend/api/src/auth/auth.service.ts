@@ -35,7 +35,7 @@ export class AuthService {
     })
 
     await this.userRepository.save(user)
-    await this.auditService.log(AuditAction.USER_CREATE, user.id, 'user', user.id)
+    // await this.auditService.log(AuditAction.USER_CREATE, user.id, 'user', user.id)
 
     return { id: user.id, email: user.email, role: user.role }
   }
@@ -65,14 +65,14 @@ export class AuthService {
     user.lastLoginAt = new Date()
     await this.userRepository.save(user)
     
-    await this.auditService.log(
-      AuditAction.LOGIN,
-      user.id,
-      'user',
-      user.id,
-      { email },
-      ipAddress,
-    )
+    // await this.auditService.log(
+    //   AuditAction.LOGIN,
+    //   user.id,
+    //   'user',
+    //   user.id,
+    //   { email },
+    //   ipAddress,
+    // )
 
     return { access_token: token, user: { id: user.id, email: user.email, role: user.role } }
   }
@@ -95,13 +95,13 @@ export class AuthService {
     user.isActive = !user.isActive
     await this.userRepository.save(user)
     
-    await this.auditService.log(
-      AuditAction.USER_CREATE,
-      adminId,
-      'user',
-      userId,
-      { action: user.isActive ? 'activated' : 'deactivated' }
-    )
+    // await this.auditService.log(
+    //   AuditAction.USER_CREATE,
+    //   adminId,
+    //   'user',
+    //   userId,
+    //   { action: user.isActive ? 'activated' : 'deactivated' }
+    // )
 
     return user
   }
