@@ -48,35 +48,29 @@ export function CartItems() {
                       <span>✓ Prescription Uploaded</span>
                     </div>
                   ) : (
-                    <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-300 dark:border-orange-700 rounded-lg">
-                      <div className="flex items-center gap-2 text-sm text-orange-900 dark:text-orange-100 mb-3">
-                        <Lock className="w-5 h-5" />
-                        <span className="font-bold">⚠️ Prescription Required</span>
+                    <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                      <div className="flex items-center gap-2 text-sm text-orange-900 dark:text-orange-100 mb-2">
+                        <Lock className="w-4 h-4" />
+                        <span className="font-semibold">⚠️ Prescription Required</span>
                       </div>
 
-                      <p className="text-sm text-orange-800 dark:text-orange-200 mb-3">
-                        This medication requires a valid prescription. Please upload your prescription to proceed with checkout.
-                      </p>
-
-                      <label 
-                        htmlFor={`prescription-${item.id}`}
-                        className="btn bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center gap-2 cursor-pointer w-full"
-                      >
-                        <Upload className="w-4 h-4" />
-                        {uploadingIds[item.id] ? 'Uploading...' : 'Upload Prescription'}
+                      <label className="block text-sm mb-2">
+                        <span className="sr-only">Upload prescription</span>
+                        <input
+                          type="file"
+                          accept="image/*,.pdf"
+                          onChange={(e) => handleFileChange(item.id, e.target.files?.[0])}
+                          className="w-full"
+                        />
                       </label>
-                      <input
-                        id={`prescription-${item.id}`}
-                        type="file"
-                        accept="image/*,.pdf"
-                        onChange={(e) => handleFileChange(item.id, e.target.files?.[0])}
-                        className="hidden"
-                        disabled={uploadingIds[item.id]}
-                      />
 
-                      <p className="text-xs text-orange-700 dark:text-orange-300 mt-2 text-center">
-                        Accepted: JPG, PNG, PDF
+                      <p className="text-xs text-orange-800 dark:text-orange-200">
+                        Upload your prescription here to attach it to this item.
                       </p>
+
+                      {uploadingIds[item.id] && (
+                        <p className="text-xs text-gray-500 mt-2">Uploading...</p>
+                      )}
                     </div>
                   )}
                 </div>
