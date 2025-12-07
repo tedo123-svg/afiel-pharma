@@ -4,7 +4,7 @@
   "description": "NestJS API for medical e-commerce platform",
   "scripts": {
     "dev": "nest start --watch",
-    "build": "node_modules/.bin/nest build",
+    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/main",
     "test": "jest",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
