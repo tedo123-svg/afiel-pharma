@@ -71,14 +71,14 @@ export function Header() {
             {/* Show Prescriptions for patients */}
             {user && user.role === 'patient' && (
               <Link href="/prescriptions" className="hover:text-primary-600 transition-colors">
-                My Prescriptions
+                {t.nav.myPrescriptions}
               </Link>
             )}
             
             {/* Show Verify Prescriptions for doctors/pharmacists */}
             {user && (user.role === 'doctor' || user.role === 'pharmacist') && (
               <Link href="/doctor/prescriptions" className="hover:text-primary-600 transition-colors">
-                Verify Prescriptions
+                {t.nav.verifyPrescriptions}
               </Link>
             )}
             
@@ -86,13 +86,13 @@ export function Header() {
             {user && user.role === 'admin' && (
               <>
                 <Link href="/admin/products" className="hover:text-primary-600 transition-colors">
-                  Manage Products
+                  {t.nav.manageProducts}
                 </Link>
                 <Link href="/admin/users" className="hover:text-primary-600 transition-colors">
-                  Manage Users
+                  {t.nav.manageUsers}
                 </Link>
                 <Link href="/admin/orders" className="hover:text-primary-600 transition-colors">
-                  Manage Orders
+                  {t.nav.manageOrders}
                 </Link>
               </>
             )}

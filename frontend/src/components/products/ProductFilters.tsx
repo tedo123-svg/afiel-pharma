@@ -47,6 +47,13 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
     onFilterChange(newFilters)
   }
 
+  const conditionsList = [
+    { key: 'Diabetes', label: t.symptomFinder.diabetes },
+    { key: 'Hypertension', label: t.symptomFinder.hypertension },
+    { key: 'Cholesterol', label: t.symptomFinder.cholesterol },
+    { key: 'Asthma', label: t.symptomFinder.asthma }
+  ]
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       <h3 className="text-lg font-semibold mb-4">{t.products.filters}</h3>
@@ -55,15 +62,15 @@ export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
         <div>
           <h4 className="font-medium mb-2">{t.products.condition}</h4>
           <div className="space-y-2">
-            {['Diabetes', 'Hypertension', 'Cholesterol', 'Asthma'].map((condition) => (
-              <label key={condition} className="flex items-center gap-2 cursor-pointer">
+            {conditionsList.map((condition) => (
+              <label key={condition.key} className="flex items-center gap-2 cursor-pointer">
                 <input 
                   type="checkbox" 
                   className="rounded"
-                  checked={filters.conditions.includes(condition)}
-                  onChange={(e) => handleConditionChange(condition, e.target.checked)}
+                  checked={filters.conditions.includes(condition.key)}
+                  onChange={(e) => handleConditionChange(condition.key, e.target.checked)}
                 />
-                <span className="text-sm">{condition}</span>
+                <span className="text-sm">{condition.label}</span>
               </label>
             ))}
           </div>
