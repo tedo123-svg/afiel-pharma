@@ -62,8 +62,8 @@ export class AuthService {
     const payload = { sub: user.id, email: user.email, role: user.role }
     const token = this.jwtService.sign(payload)
 
-    user.lastLoginAt = new Date()
-    await this.userRepository.save(user)
+    // user.lastLoginAt = new Date()
+    // await this.userRepository.save(user)
     
     // await this.auditService.log(
     //   AuditAction.LOGIN,
