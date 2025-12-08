@@ -1,4 +1,4 @@
-# 🚀 Quick Start - Deploy in 30 Minutes
+Error: Failed to run sql query: ERROR: 42703: column "is_active" of relation "users" does not exist LINE 8: is_active, ^# 🚀 Quick Start - Deploy in 30 Minutes
 
 Follow these steps to deploy your AfiEl Pharma platform for FREE!
 
